@@ -73,7 +73,7 @@ object HelloMacro {
     msg.tree match { 
       case Literal(Constant("A")) => q""" println("Hello, " + $msg) """
       case Literal(Constant("B")) => q""" println("こんにちは, " + $msg) """
-      case _ => c.abort(c.enclosingPosition, "コンパイルエラー")
+      case _ => c.abort(c.enclosingPosition, """"A","B"以外はコンパイルできません""")
     }
   }
 }
@@ -92,7 +92,7 @@ scala> HelloMacro.hello("B")
 こんにちは, B
 
 scala> HelloMacro.hello("C")
-<console>:15: error: コンパイルエラー
+<console>:15: error: "A","B"以外はコンパイルできません
        HelloMacro.hello("C")
                        ^
 ```
