@@ -36,18 +36,16 @@
 
 
 Scalaのマクロの種類①
------
 - defマクロ
   - ScalaのASTをいじれる
   - コンパイル時に動く
 
 - meta系
-  - ScalaのASTを標準ASTに変換して色々やる
+  - ScalaのASTを標準ASTに変換して色々できる
 
 
 
 Scalaのマクロの種類②
------
 - ランタイムリフレクション
   - 遅い
 
@@ -57,8 +55,12 @@ Scalaのマクロの種類②
 
 
 
+Scalaのマクロの実行タイミング
+![macro](./macro.png)
+
+
+
 簡単なdefマクロの例
------
 
 ```scala
 import language.experimental.macros
@@ -82,7 +84,6 @@ object HelloMacro {
 
 
 実行結果
------
 
 ```sh
 scala> HelloMacro.hello("A")
@@ -100,7 +101,6 @@ scala> HelloMacro.hello("C")
 
 
 永続値を持つようなEnum
------
 
 ```scala
 sealed trait AorB {
@@ -123,7 +123,6 @@ object AorB {
 
 
 Enumを抽象化
------
 
 ```scala
 import language.experimental.macros
@@ -142,7 +141,6 @@ trait EnumCompanion[E <: Enum] {
 
 
 Enumのapplyを展開するマクロ
------
 
 ```scala
 import scala.reflect.macros.blackbox
@@ -169,7 +167,6 @@ object EnumMacro {
 
 
 マクロを利用したEnum実装例
------
 
 ```scala
 sealed trait AorB extends Enum {type V = String}
@@ -192,7 +189,7 @@ https://github.com/lloydmeta/enumeratum
 
 
 
-蛇足： パラダイスを使うと...
+パラダイスを使うと...
 ```scala
 @Holder
 sealed abstract class AorB(val value: String)
